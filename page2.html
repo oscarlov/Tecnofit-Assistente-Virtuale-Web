@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnofit Assistente Virtuale</title>
+    <style>
+        /* Contenitore principale */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 90%;
+            margin: auto;
+            padding-top: 20px;
+        }
+
+        /* Sezione di sinistra (pulsante + risposta) */
+        .left-section {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        /* Sezione di destra (griglia di immagini) */
+        .right-section {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Contenitore della griglia */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 colonne */
+            grid-template-rows: repeat(2, 1fr);   /* 2 righe */
+            gap: 10px; /* Spazio tra le immagini */
+            width: 100%;
+            max-width: 700px; /* Limita la larghezza massima */
+        }
+
+        /* Stile dei pulsanti */
+        .grid-container button {
+            background-color: transparent; /* Sfondo trasparente */
+            border: none; /* Rimuove i bordi del pulsante */
+            padding: 0; /* Rimuove padding interno */
+            cursor: pointer; /* Mostra il cursore del puntatore */
+            outline: none; /* Rimuove il contorno quando selezionato */
+        }
+
+        /* Stile delle immagini */
+        .grid-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover; /* Adatta l'immagine senza distorsioni */
+            border-radius: 8px; /* Aggiunge angoli arrotondati */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiunge ombra */
+            transition: transform 0.3s ease;
+        }
+
+        /* Effetto hover per le immagini */
+        .grid-container img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Stile del pulsante e del box della risposta */
+        .chat-form-container {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        #speak-button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        #stop-button {
+            background-color: #ff0202;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        #speak-button:hover {
+            background-color: #0b7dda;
+        }
+
+        #response {
+            width: 100%;
+            height: 150px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: none;
+        }
+
+        /* Stile del testo con i risultati dei checkbox */
+        #result {
+            font-size: 16px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #2196F3;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-link:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sezione sinistra: Pulsante per parlare e box di risposta -->
+        <div class="left-section">
+            <div class="chat-form-container">
+                <h1>Tecnofit Assistente Virtuale</h1>
+                <form id="chat-form">
+                    <label for="mytext">Clicca il pulsante e parla:</label>
+                    <button type="button" id="speak-button">Inizia a parlare</button>
+                </form>
+            </div>
+            <div>
+                <h2>Risposta:</h2>
+                <textarea id="response" rows="20" readonly></textarea>
+            </div>
+            <p id="result"></p>
+            <button type="button" id="stop-button">Stop</button>
+            <a href="https://www.tecnofitsrl.it" class="button-link">Torna al sito</a>
+        </div>
+
+        <!-- Sezione destra: Griglia delle immagini -->
+        <div class="right-section">
+            <div class="grid-container">
+                <button onclick="portaScarpe(1)">
+                    <img src="./images/non_disponibile.png" alt="Immagine 1" id="imag0">
+                </button>
+                <button onclick="portaScarpe(2)">
+                    <img src="./images/non_disponibile.png" alt="Immagine 2" id="imag1">
+                </button>
+                <button onclick="portaScarpe(3)">
+                    <img src="./images/non_disponibile.png" alt="Immagine 3" id="imag2">
+                </button>
+                <button onclick="portaScarpe(4)">
+                    <img src="./images/non_disponibile.png" alt="Immagine 4" id="imag3">
+                </button>
+                <button onclick="portaScarpe(5)">
+                    <img src="./images/non_disponibile.png" alt="Immagine 5" id="imag4">
+                </button>
+                <button onclick="portaScarpe(6)">
+                    <img src="./images/non_disponibile.png" alt="Immagine 6" id="imag5">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Recupera i valori dei checkbox da sessionStorage
+        const checkbox1 = sessionStorage.getItem('switch1') === 'true';
+        const checkbox2 = sessionStorage.getItem('switch2') === 'true';
+
+        // Mostra i risultati nella pagina
+        const resultElement = document.getElementById('result');
+        resultElement.innerHTML = `Numero: ${checkbox1 ? '&lt; 40' : '&gt;= 40'}, Impermeabili: ${checkbox2 ? 'Sì' : 'No'}`;
+        document.getElementById('stop-button').addEventListener('click', function() {
+            stopRecognition(); // Chiamata alla funzione di stop (da definire in script.js)
+        });
+    </script>
+</body>
+</html>
+
