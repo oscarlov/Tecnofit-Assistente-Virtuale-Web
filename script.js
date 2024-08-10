@@ -3,7 +3,7 @@ const speakButton = document.getElementById('speak-button');
 const responseTextarea = document.getElementById('response');
 const chatContainer = document.getElementById('chat-container');
 
-const API_KEY = 'sk-proj-NMu3ZVus2GFQkjrPkUQbT3BlbkFJdvogt6MQd2T4bk7TSUdq';
+const API_KEY = 'sk-PKRb2AP_zVgd2WsXe9EYx4I_rqLQhAaEzeCyN4y8dnT3BlbkFJsMMfeXuOW2A6Q8eCAFYrx2DmcwVBa16iepNDGbKpoA';
 
 let lista_scarpe_proposte = [];  // Array globale per salvare le parole trovate
 let lista_scarpe_da_portare = [];  // Array globale per salvare le parole trovate
