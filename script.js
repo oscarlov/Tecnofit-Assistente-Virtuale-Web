@@ -3,7 +3,8 @@ const speakButton = document.getElementById('speak-button');
 const responseTextarea = document.getElementById('response');
 const chatContainer = document.getElementById('chat-container');
 
-const API_KEY = 'sk-PKRb2AP_zVgd2WsXe9EYx4I_rqLQhAaEzeCyN4y8dnT3BlbkFJsMMfeXuOW2A6Q8eCAFYrx2DmcwVBa16iepNDGbKpoA';
+require('dotenv').config();
+const apiKey = process.env.API_KEY;
 
 let lista_scarpe_proposte = [];  // Array globale per salvare le parole trovate
 let lista_scarpe_da_portare = [];  // Array globale per salvare le parole trovate
@@ -60,7 +61,7 @@ if (recognition) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${API_KEY}`,
+                        'Authorization': `Bearer ${apiKey}`,
                     },
                     body: JSON.stringify({
                         model: 'gpt-3.5-turbo',
@@ -125,7 +126,7 @@ if (recognition) {
                     method: 'POST',
                     headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${API_KEY}`,
+                            'Authorization': `Bearer ${apiKey}`,
                     },
                     body: JSON.stringify({
                         model: 'gpt-3.5-turbo',
@@ -190,7 +191,7 @@ if (recognition) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${API_KEY}`,
+                        'Authorization': `Bearer ${apiKey}`,
                     },
                     body: JSON.stringify({
                         model: 'gpt-3.5-turbo',
@@ -261,7 +262,7 @@ if (recognition) {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${API_KEY}`,
+                        'Authorization': `Bearer ${apiKey}`,
                     },
                     body: JSON.stringify({
                         model: 'gpt-3.5-turbo',
